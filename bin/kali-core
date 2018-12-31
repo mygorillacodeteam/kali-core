@@ -1,0 +1,53 @@
+#!/bin/bash
+
+source lib/import_all.sh
+
+import_all "info"
+import_all "lib"
+
+kali_core(){
+
+    while [[ $# -ge 0 ]]
+    do
+
+        case "$1" in
+
+            -v|--version|version)
+                kali_core_version
+                exit
+            ;;
+
+            -h|--help|help)
+                kali_core_help
+                exit
+            ;;
+
+            -i|--install|install)
+                shift
+                kali_core_install "$@"
+                exit
+            ;;
+
+            -u|--uninstall|uninstall)
+                shift
+                kali_core_uninstall "$@"
+                exit
+            ;;
+
+            -t|--test|test)
+                shift
+                kali_core_test "$@"
+                exit
+            ;;
+
+            *)
+                kali_core_help
+                exit
+            ;;
+
+        esac
+    done
+
+}
+
+kali_core "$@"
